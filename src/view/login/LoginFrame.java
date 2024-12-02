@@ -1,52 +1,150 @@
 package view.login;
 
-import view.FrameUtil;
-import view.level.LevelFrame;
-
 import javax.swing.*;
 import java.awt.*;
-
+import java.util.ArrayList;
 
 public class LoginFrame extends JFrame {
-    private JTextField username;
-    private JTextField password;
-    private JButton submitBtn;
-    private JButton resetBtn;
-    private LevelFrame levelFrame;
 
+    private JPanel loginPanel;   // 登录界面
+    private JPanel registerPanel; // 注册界面
+    private CardLayout cardLayout; // 页面切换布局
+    private ArrayList<String[]> userDatabase; // 用户数据
+    private view.level.LevelFrame levelFrame; // 使用全局的关卡窗口类
 
     public LoginFrame(int width, int height) {
-        this.setTitle("Login Frame");
-        this.setLayout(null);
-        this.setSize(width, height);
-        JLabel userLabel = FrameUtil.createJLabel(this, new Point(50, 20), 70, 40, "username:");
-        JLabel passLabel = FrameUtil.createJLabel(this, new Point(50, 80), 70, 40, "password:");
-        username = FrameUtil.createJTextField(this, new Point(120, 20), 120, 40);
-        password = FrameUtil.createJTextField(this, new Point(120, 80), 120, 40);
-
-        submitBtn = FrameUtil.createButton(this, "Confirm", new Point(40, 140), 100, 40);
-        resetBtn = FrameUtil.createButton(this, "Reset", new Point(160, 140), 100, 40);
-
-        submitBtn.addActionListener(e -> {
-            System.out.println("Username = " + username.getText());
-            System.out.println("Password = " + password.getText());
-            if (this.levelFrame != null) {
-                this.levelFrame.setVisible(true);
-                this.setVisible(false);
-            }
-            //todo: check login info
-
-        });
-        resetBtn.addActionListener(e -> {
-            username.setText("");
-            password.setText("");
-        });
-
-        this.setLocationRelativeTo(null);
+        // 初始化窗口
+        this.setTitle("登陆界面");
+        this.setSize(430, 250);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        this.setLocationRelativeTo(null);
+
+        // 初始化用户数据
+        userDatabase = new ArrayList<>();
+
+        // 初始化布局
+        cardLayout = new CardLayout();
+        this.setLayout(cardLayout);
+
+        // 初始化登录界面
+        initLoginPanel();
+
+        // 初始化注册界面
+        initRegisterPanel();
+
+        // 显示登录界面
+        cardLayout.show(this.getContentPane(), "login");
+        //this.getContentPane() 获取了 LoginFrame 的内容面板，用于操作其中的组件和布局。
+        //loginPanel 被添加到 CardLayout 管理的容器中，并且指定了标识名 "login"
+        //"login"表示你想要显示的那张卡片（也就是登录界面）
     }
 
-    public void setLevelFrame(LevelFrame levelFrame) {
+    private void initLoginPanel() {
+        loginPanel = new JPanel();
+        loginPanel.setLayout(null);
+
+        // 登录组件
+        JLabel userLabel = new JLabel("用户名:");
+        userLabel.setBounds(50, 50, 100, 30);
+        loginPanel.add(userLabel);
+
+        JTextField usernameField = new JTextField();
+        usernameField.setBounds(150, 50, 150, 30);
+        loginPanel.add(usernameField);
+
+        JLabel passLabel = new JLabel("密码:");
+        passLabel.setBounds(50, 100, 100, 30);
+        loginPanel.add(passLabel);
+
+        JPasswordField passwordField = new JPasswordField();
+        passwordField.setBounds(150, 100, 150, 30);
+        loginPanel.add(passwordField);
+
+        JButton loginButton = new JButton("登入");
+        loginButton.setBounds(50, 150, 100, 30);
+        loginPanel.add(loginButton);
+
+        JButton registerButton = new JButton("没有账号？点我注册");
+        registerButton.setBounds(200, 150, 150, 30);
+        loginPanel.add(registerButton);
+
+        // 登录逻辑：点击登入按钮后调用事件监听器，获取输入的用户名和密码并与数据库作比较，作出判断
+        loginButton.addActionListener(e -> {
+            String username = usernameField.getText();
+            String password = new String(passwordField.getPassword());
+
+            boolean isValid = userDatabase.stream()
+                    .anyMatch(user -> user[0].equals(username) && user[1].equals(password));
+
+            if (isValid) {
+                JOptionPane.showMessageDialog(this, "登录成功！");
+                this.levelFrame.setVisible(true); // 显示关卡窗口
+                this.setVisible(false);          // 隐藏登录窗口
+            } else {
+                JOptionPane.showMessageDialog(this, "用户名或密码错误！");
+            }
+        });
+
+        // 切换到注册界面
+        registerButton.addActionListener(e -> cardLayout.show(this.getContentPane(), "register"));
+
+        // 添加登录面板
+        this.add(loginPanel, "login");
+    }
+
+    private void initRegisterPanel() {
+        registerPanel = new JPanel();
+        registerPanel.setLayout(null);
+
+        // 注册组件
+        JLabel newUserLabel = new JLabel("新建用户名:");
+        newUserLabel.setBounds(50, 50, 100, 30);
+        registerPanel.add(newUserLabel);
+
+        JTextField newUsernameField = new JTextField();
+        newUsernameField.setBounds(150, 50, 150, 30);
+        registerPanel.add(newUsernameField);
+
+        JLabel newPassLabel = new JLabel("新建密码:");
+        newPassLabel.setBounds(50, 100, 100, 30);
+        registerPanel.add(newPassLabel);
+
+        JPasswordField newPasswordField = new JPasswordField();
+        newPasswordField.setBounds(150, 100, 150, 30);
+        registerPanel.add(newPasswordField);
+
+        JButton saveButton = new JButton("保存");
+        saveButton.setBounds(100, 150, 100, 30);
+        registerPanel.add(saveButton);
+
+        JButton backButton = new JButton("返回登录");
+        backButton.setBounds(220, 150, 100, 30);
+        registerPanel.add(backButton);
+
+        // 保存注册信息逻辑
+        saveButton.addActionListener(e -> {
+            String newUser = newUsernameField.getText();
+            String newPass = new String(newPasswordField.getPassword());
+
+            boolean exists = userDatabase.stream()
+                    .anyMatch(user -> user[0].equals(newUser));
+
+            if (exists) {
+                JOptionPane.showMessageDialog(this, "用户名已存在！");
+            } else {
+                userDatabase.add(new String[]{newUser, newPass});
+                JOptionPane.showMessageDialog(this, "注册成功！");
+                cardLayout.show(this.getContentPane(), "login"); // 切回登录界面
+            }
+        });
+
+        // 返回登录界面
+        backButton.addActionListener(e -> cardLayout.show(this.getContentPane(), "login"));
+
+        // 添加注册面板
+        this.add(registerPanel, "register");
+    }
+    public void setLevelFrame(view.level.LevelFrame levelFrame) {
         this.levelFrame = levelFrame;
     }
 }
