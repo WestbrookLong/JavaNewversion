@@ -6,8 +6,9 @@ public class MapMatrix {
 
     public MapMatrix(int[][] matrix) {
         this.matrix = matrix;
-        this.originmatrix = matrix;
+        this.originmatrix = cloneMatrix(matrix);
     }
+
 
     public int getWidth() {
         return this.matrix[0].length;
@@ -29,8 +30,14 @@ public class MapMatrix {
         return matrix;
     }
     public void resetMatrix() {
-        // 这里应该是您的初始地图矩阵
-        int[][] initialMatrix = originmatrix;
-        this.matrix = initialMatrix;
+        this.matrix = cloneMatrix(originmatrix);
+    }
+    public int[][] cloneMatrix(int[][] matrix) {
+        int[][] clonedMatrix = new int[matrix.length][];
+        for (int i = 0; i < matrix.length; i++) {
+            clonedMatrix[i] = matrix[i].clone();
+        }
+        return clonedMatrix;
     }
 }
+
