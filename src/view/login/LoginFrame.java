@@ -2,14 +2,14 @@ package view.login;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
+import java.io.File;
+import java.io.IOException;
 
 public class LoginFrame extends JFrame {
 
     private JPanel loginPanel;   // 登录界面
     private JPanel registerPanel; // 注册界面
     private CardLayout cardLayout; // 页面切换布局
-    private ArrayList<String[]> userDatabase; // 用户数据
     private view.level.LevelFrame levelFrame; // 使用全局的关卡窗口类
 
     public LoginFrame(int width, int height) {
@@ -18,9 +18,6 @@ public class LoginFrame extends JFrame {
         this.setSize(430, 250);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
-
-        // 初始化用户数据
-        userDatabase = new ArrayList<>();
 
         // 初始化布局
         cardLayout = new CardLayout();
@@ -34,9 +31,6 @@ public class LoginFrame extends JFrame {
 
         // 显示登录界面
         cardLayout.show(this.getContentPane(), "login");
-        //this.getContentPane() 获取了 LoginFrame 的内容面板，用于操作其中的组件和布局。
-        //loginPanel 被添加到 CardLayout 管理的容器中，并且指定了标识名 "login"
-        //"login"表示你想要显示的那张卡片（也就是登录界面）
     }
 
     private void initLoginPanel() {
@@ -72,79 +66,102 @@ public class LoginFrame extends JFrame {
         loginButton.addActionListener(e -> {
             String username = usernameField.getText();
             String password = new String(passwordField.getPassword());
-
-            boolean isValid = userDatabase.stream()
-                    .anyMatch(user -> user[0].equals(username) && user[1].equals(password));
-
-            if (isValid) {
-                JOptionPane.showMessageDialog(this, "登录成功！");
-                this.levelFrame.setVisible(true); // 显示关卡窗口
-                this.setVisible(false);          // 隐藏登录窗口
-            } else {
-                JOptionPane.showMessageDialog(this, "用户名或密码错误！");
+            File dir2 = new File("Userdata");
+            File[] files2 = dir2.listFiles();
+            if (files2 != null) {
+                for (File file : files2) {
+                    if (file.isDirectory() && file.getName().equals(username)) {
+                        File folder = new File("Userdata\\" + username);
+                        File[] contents = folder.listFiles();
+                        if (contents != null) {
+                            for (File content : contents) {
+                                if (content.getName().equals(password + ".txt")) {
+                                    JOptionPane.showMessageDialog(this, "登录成功！");
+                                    this.levelFrame.setVisible(true); // 显示关卡窗口
+                                    this.setVisible(false);          // 隐藏登录窗口
+                                } else {
+                                    JOptionPane.showMessageDialog(this, "用户名或密码错误！");
+                                    return;
+                                }
+                            }
+                        }
+                    }
+                }
             }
         });
 
-        // 切换到注册界面
-        registerButton.addActionListener(e -> cardLayout.show(this.getContentPane(), "register"));
+                    // 切换到注册界面
+                    registerButton.addActionListener(e -> cardLayout.show(this.getContentPane(), "register"));
 
-        // 添加登录面板
-        this.add(loginPanel, "login");
-    }
+                    // 添加登录面板
+                    this.add(loginPanel, "login");
+                }
 
-    private void initRegisterPanel() {
-        registerPanel = new JPanel();
-        registerPanel.setLayout(null);
+                private void initRegisterPanel () {
+                    registerPanel = new JPanel();
+                    registerPanel.setLayout(null);
 
-        // 注册组件
-        JLabel newUserLabel = new JLabel("新建用户名:");
-        newUserLabel.setBounds(50, 50, 100, 30);
-        registerPanel.add(newUserLabel);
+                    // 注册组件
+                    JLabel newUserLabel = new JLabel("新建用户名:");
+                    newUserLabel.setBounds(50, 50, 100, 30);
+                    registerPanel.add(newUserLabel);
 
-        JTextField newUsernameField = new JTextField();
-        newUsernameField.setBounds(150, 50, 150, 30);
-        registerPanel.add(newUsernameField);
+                    JTextField newUsernameField = new JTextField();
+                    newUsernameField.setBounds(150, 50, 150, 30);
+                    registerPanel.add(newUsernameField);
 
-        JLabel newPassLabel = new JLabel("新建密码:");
-        newPassLabel.setBounds(50, 100, 100, 30);
-        registerPanel.add(newPassLabel);
 
-        JPasswordField newPasswordField = new JPasswordField();
-        newPasswordField.setBounds(150, 100, 150, 30);
-        registerPanel.add(newPasswordField);
+                    JLabel newPassLabel = new JLabel("新建密码:");
+                    newPassLabel.setBounds(50, 100, 100, 30);
+                    registerPanel.add(newPassLabel);
 
-        JButton saveButton = new JButton("保存");
-        saveButton.setBounds(100, 150, 100, 30);
-        registerPanel.add(saveButton);
+                    JPasswordField newPasswordField = new JPasswordField();
+                    newPasswordField.setBounds(150, 100, 150, 30);
+                    registerPanel.add(newPasswordField);
 
-        JButton backButton = new JButton("返回登录");
-        backButton.setBounds(220, 150, 100, 30);
-        registerPanel.add(backButton);
+                    JButton saveButton = new JButton("保存");
+                    saveButton.setBounds(100, 150, 100, 30);
+                    registerPanel.add(saveButton);
 
-        // 保存注册信息逻辑
-        saveButton.addActionListener(e -> {
-            String newUser = newUsernameField.getText();
-            String newPass = new String(newPasswordField.getPassword());
+                    JButton backButton = new JButton("返回登录");
+                    backButton.setBounds(220, 150, 100, 30);
+                    registerPanel.add(backButton);
 
-            boolean exists = userDatabase.stream()
-                    .anyMatch(user -> user[0].equals(newUser));
+                    // 保存注册信息逻辑
+                    saveButton.addActionListener(e2 -> {
+                        String newUser = newUsernameField.getText();
+                        String newPass = new String(newPasswordField.getPassword());
+                        File dir = new File("Userdata");
+                        File[] files = dir.listFiles();
+                        if (files != null) {
+                            for (File file : files) {
+                                if (file.isDirectory() && file.getName().equals(newUser)) {
+                                    JOptionPane.showMessageDialog(this, "用户名已存在！");
+                                    return;
+                                }
+                            }
+                            File f1 = new File("Userdata/" + newUser);
+                            f1.mkdirs();
+                            File f2 = new File("Userdata/" + newUser + "/" + newPass + ".txt");
+                            try {
+                                f2.createNewFile();
+                            } catch (IOException ex) {
+                                throw new RuntimeException(ex);
+                            }
+                            JOptionPane.showMessageDialog(this, "注册成功！");
+                            cardLayout.show(this.getContentPane(), "login"); // 切回登录界面
+                        }
+                    });
 
-            if (exists) {
-                JOptionPane.showMessageDialog(this, "用户名已存在！");
-            } else {
-                userDatabase.add(new String[]{newUser, newPass});
-                JOptionPane.showMessageDialog(this, "注册成功！");
-                cardLayout.show(this.getContentPane(), "login"); // 切回登录界面
+                    // 返回登录界面
+                    backButton.addActionListener(e -> cardLayout.show(this.getContentPane(), "login"));
+
+                    // 添加注册面板
+                    this.add(registerPanel, "register");
+                }
+
+                public void setLevelFrame (view.level.LevelFrame levelFrame){
+                    this.levelFrame = levelFrame;
+                }
             }
-        });
 
-        // 返回登录界面
-        backButton.addActionListener(e -> cardLayout.show(this.getContentPane(), "login"));
-
-        // 添加注册面板
-        this.add(registerPanel, "register");
-    }
-    public void setLevelFrame(view.level.LevelFrame levelFrame) {
-        this.levelFrame = levelFrame;
-    }
-}
