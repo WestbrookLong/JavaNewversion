@@ -19,10 +19,8 @@ public class GameController {
 
     public void restartGame() {
         System.out.println("Do restart game here");
+        model.resetMatrix();
         view.resetGamePanel();
-
-
-
     }
 
     public boolean doMove(int row, int col, Direction direction) {
