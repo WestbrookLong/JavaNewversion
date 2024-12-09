@@ -54,6 +54,7 @@ public class GamePanel extends ListenerPanel {
         this.grids = new GridComponent[model.getHeight()][model.getWidth()];
         initialGame(); // 调用 initialGame 方法重新初始化游戏面板
         this.repaint(); // 重绘游戏面板
+
     }
 
     @Override
@@ -89,17 +90,17 @@ public class GamePanel extends ListenerPanel {
         this.stepLabel.setText(String.format("Step: %d", this.steps));
         this.repaint();// Repaint the entire panel to update the UI
 
-            if(controller.isVictory()){
-                VictoryFrame victoryFrame = new VictoryFrame(500, 400);
+        if(controller.isVictory()){
+            VictoryFrame victoryFrame = new VictoryFrame(500, 400);
 
-                victoryFrame.setVisible(true);
+            victoryFrame.setVisible(true);
 
-            }
-            if(controller.isFail()){
-                FailFrame failFrame = new FailFrame(500, 400);
-                failFrame.setVisible(true);
+        }
+        if(controller.isFail()){
+            FailFrame failFrame = new FailFrame(500, 400);
+            failFrame.setVisible(true);
 
-            }
+        }
 
     }
 
@@ -113,5 +114,13 @@ public class GamePanel extends ListenerPanel {
 
     public GridComponent getGridComponent(int row, int col) {
         return grids[row][col];
+    }
+
+    public int getSteps() {
+        return steps;
+    }
+
+    public void setSteps(int steps) {
+        this.steps = steps;
     }
 }
