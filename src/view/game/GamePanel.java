@@ -16,6 +16,7 @@ public class GamePanel extends ListenerPanel {
     private int steps;
     private final int GRID_SIZE = 50;
     private Hero hero;
+    private int herochoice;
 
     public GamePanel(MapMatrix model) {
         this.setVisible(true);
@@ -38,7 +39,7 @@ public class GamePanel extends ListenerPanel {
                         grids[i][j].setBoxInGrid(new Box(GRID_SIZE - 10, GRID_SIZE - 10));
                         break;
                     case 2:
-                        this.hero = new Hero(GRID_SIZE - 16, GRID_SIZE - 16, i, j);
+                        this.hero = new Hero(GRID_SIZE - 16, GRID_SIZE - 16, i, j, herochoice);
                         grids[i][j].setHeroInGrid(hero);
                         break;
                 }
@@ -123,4 +124,6 @@ public class GamePanel extends ListenerPanel {
     public void setSteps(int steps) {
         this.steps = steps;
     }
+    public void setHerochoice(int a){this.herochoice = a;}
+    public int getHerochoice(){return herochoice;}
 }

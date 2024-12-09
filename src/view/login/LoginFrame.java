@@ -68,12 +68,15 @@ public class LoginFrame extends JFrame {
         loginButton.addActionListener(e -> {
             String usernameInput = usernameField.getText();
             String password = new String(passwordField.getPassword());
-            File dir2 = new File("Userdata");
+
+
+
+            File dir2 = new File("C:\\Users\\WESTBROOK\\IdeaProjects\\JavaNewversion\\src\\Userdata");
             File[] files2 = dir2.listFiles();
             if (files2 != null) {
                 for (File file : files2) {
                     if (file.isDirectory() && file.getName().equals(usernameInput)) {
-                        File folder = new File("Userdata\\" + usernameInput);
+                        File folder = new File("C:\\Users\\WESTBROOK\\IdeaProjects\\JavaNewversion\\src\\Userdata\\" + usernameInput);
                         File[] contents = folder.listFiles();
                         if (contents != null) {
                             for (File content : contents) {
@@ -135,7 +138,7 @@ public class LoginFrame extends JFrame {
         saveButton.addActionListener(e2 -> {
             String newUser = newUsernameField.getText();
             String newPass = new String(newPasswordField.getPassword());
-            File dir = new File("Userdata");
+            File dir = new File("C:\\Users\\WESTBROOK\\IdeaProjects\\JavaNewversion\\src\\Userdata");
             File[] files = dir.listFiles();
             if (files != null) {
                 for (File file : files) {
@@ -144,15 +147,15 @@ public class LoginFrame extends JFrame {
                         return;
                     }
                 }
-                File f1 = new File("Userdata/" + newUser);
+                File f1 = new File("C:\\Users\\WESTBROOK\\IdeaProjects\\JavaNewversion\\src\\Userdata/" + newUser);
                 f1.mkdirs();
-                File f2 = new File("Userdata/" + newUser + "/" + newPass + ".txt");
+                File f2 = new File("C:\\Users\\WESTBROOK\\IdeaProjects\\JavaNewversion\\src\\Userdata/" + newUser + "/" + newPass + ".txt");
                 try {
                     f2.createNewFile();
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
-                File f3 = new File("Userdata/" + newUser + "/" + newUser + "data");
+                File f3 = new File("C:\\Users\\WESTBROOK\\IdeaProjects\\JavaNewversion\\src\\Userdata/" + newUser + "/" + newUser + "data");
                 f3.mkdirs();
                 JOptionPane.showMessageDialog(this, "注册成功！");
                 cardLayout.show(this.getContentPane(), "login"); // 切回登录界面

@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class LevelFrame extends JFrame {
+    private GameFrame gameFrame;
 
     public LevelFrame(int width, int height) {
         this.setTitle("Level");
@@ -25,7 +26,7 @@ public class LevelFrame extends JFrame {
                     {1, 0, 10, 2, 0, 1},
                     {1, 1, 1, 1, 1, 1},
             });
-            GameFrame gameFrame = new GameFrame(600, 450, mapMatrix);
+            this.gameFrame = new GameFrame(600, 450, mapMatrix);
             this.setVisible(false);
             gameFrame.setVisible(true);
         });
@@ -39,9 +40,9 @@ public class LevelFrame extends JFrame {
                     {1, 1, 0, 1, 1, 1},
                     {0, 1, 1, 1, 0, 0},
             });
-            GameFrame gameFrame = new GameFrame(600, 450, mapMatrix);
+            this.gameFrame = new GameFrame(600, 450, mapMatrix);
             this.setVisible(false);
-            gameFrame.setVisible(true);
+            gameFrame.setVisible(true);//FUCK
         });
         level3Btn.addActionListener(l->{
             MapMatrix mapMatrix = new MapMatrix(new int[][]{
@@ -52,7 +53,7 @@ public class LevelFrame extends JFrame {
                     {1, 1, 0, 1, 1, 1},
                     {0, 1, 1, 1, 0, 0},
             });
-            GameFrame gameFrame = new GameFrame(600, 450, mapMatrix);
+            this.gameFrame = new GameFrame(600, 450, mapMatrix);
             this.setVisible(false);
             gameFrame.setVisible(true);
         });
@@ -64,4 +65,7 @@ public class LevelFrame extends JFrame {
 
     }
 
+    public GameFrame getGameFrame() {
+        return gameFrame;
+    }
 }

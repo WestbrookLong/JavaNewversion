@@ -1,4 +1,6 @@
-import view.level.LevelFrame; 
+import view.game.GameFrame;
+import view.game.HerochoosingFrame;
+import view.level.LevelFrame;
 import view.login.LoginFrame; 
 
 import javax.swing.*;
@@ -9,7 +11,10 @@ public class Main {
           
             LoginFrame loginFrame = new LoginFrame(280, 280);
             LevelFrame levelFrame = new LevelFrame(500, 200);
+
+
             loginFrame.setLevelFrame(levelFrame);
+
 
            
             String[] options = {"游客模式", "用户模式"};
@@ -23,7 +28,7 @@ public class Main {
                     null, options, options[0]);
 
             if (choice == 0) {
-               
+                
                 levelFrame.setVisible(true);
             } else if (choice == 1) {
                

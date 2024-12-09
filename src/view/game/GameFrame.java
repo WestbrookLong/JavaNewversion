@@ -9,6 +9,9 @@ import model.MapMatrix;
 import view.FrameUtil;
 import view.login.LoginFrame;
 
+
+
+
 public class GameFrame extends JFrame {
     String username;
     private GameController controller;
@@ -35,6 +38,7 @@ public class GameFrame extends JFrame {
         this.add(gamePanel);
         this.controller = new GameController(gamePanel, mapMatrix);
 
+
         this.restartBtn = FrameUtil.createButton(this, "Restart", new Point(gamePanel.getWidth() + 80, 120), 80, 50);
         this.loadBtn = FrameUtil.createButton(this, "Load", new Point(gamePanel.getWidth() + 80, 210), 80, 50);
         //改动
@@ -45,14 +49,17 @@ public class GameFrame extends JFrame {
         this.LEFT = FrameUtil.createButton(this, "LEFT", new Point(gamePanel.getWidth() - 220, 50), 100, 50);
         this.RIGHT = FrameUtil.createButton(this, "RIGHT", new Point(gamePanel.getWidth() -320, 50), 100, 50);
         gamePanel.setStepLabel(stepLabel);
+        HerochoosingFrame herochoosingFrame = new HerochoosingFrame(500, 200, this.getGamePanel());
+        herochoosingFrame.setVisible(true);
 
         this.restartBtn.addActionListener(e -> {
             controller.restartGame();
             gamePanel.requestFocusInWindow();//enable key listener
         });
+
         this.loadBtn.addActionListener(e -> {
             username = LoginFrame.getUsername();
-            String dataPath = "Userdata/" + username + "/" + username + "data/" + username + "save.txt";
+            String dataPath = "C:\\Users\\WESTBROOK\\IdeaProjects\\JavaNewversion\\src\\Userdata/" + username + "/" + username + "data/" + username + "save.txt";
             try {
                 BufferedReader reader = new BufferedReader(new FileReader(dataPath));
                 String line;
@@ -84,7 +91,7 @@ public class GameFrame extends JFrame {
 
         this.saveBtn.addActionListener(e -> {
             username= LoginFrame.getUsername();
-            String dataPath = "Userdata/"+username+"/"+username+"data/"+username+"save.txt";
+            String dataPath = "C:\\Users\\WESTBROOK\\IdeaProjects\\JavaNewversion\\src\\Userdata/"+username+"/"+username+"data/"+username+"save.txt";
             try {
                 FileWriter writer = new FileWriter(dataPath);
                 int[][] matrix = mapMatrix.getMatrix();
@@ -123,4 +130,7 @@ public class GameFrame extends JFrame {
 
     }
 
+    public GamePanel getGamePanel() {
+        return gamePanel;
+    }
 }
