@@ -32,6 +32,9 @@ public class MapMatrix {
     public void resetMatrix() {
         this.matrix = cloneMatrix(originmatrix);
     }
+    public void setMatrix(int[][] newMatrix) {
+        this.matrix = newMatrix;
+    }
     public int[][] cloneMatrix(int[][] matrix) {
         int[][] clonedMatrix = new int[matrix.length][];
         for (int i = 0; i < matrix.length; i++) {
@@ -40,4 +43,3 @@ public class MapMatrix {
         return clonedMatrix;
     }
 }
-
