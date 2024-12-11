@@ -47,7 +47,7 @@ public class Hero extends JComponent {
 
     public void readfile(int herochoice){
         if(herochoice == 1){
-        File file = new File("src/Hero.jpg"); // 替换为你的图片文件路径
+        File file = new File("src/img.png"); // 替换为你的图片文件路径
         try {
             image = ImageIO.read(file);
             // 现在你可以使用image对象进行进一步的操作

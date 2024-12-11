@@ -15,8 +15,8 @@ public class HerochoosingFrame extends JFrame {
         this.setLocation(120, 120);
         this.gamePanel = gamePanel;
 
-        JButton herodefault = FrameUtil.createButton(this, "default", new Point(30, height/2 - 50), 60, 60);
-        JButton hero2 = FrameUtil.createButton(this, "hero2", new Point(120, height/2 - 50), 60, 60);
+        JButton herodefault = FrameUtil.createButton(this, "default", new Point(30, height/2 - 50), 120, 120);
+        JButton hero2 = FrameUtil.createButton(this, "hero2", new Point(150, height/2 - 50), 120, 120);
         herodefault.addActionListener(e->{
             gamePanel.setHerochoice(1);
             this.setVisible(false);
