@@ -87,7 +87,7 @@ public class GameFrame extends JFrame {
                 reader.close();
                 JOptionPane.showMessageDialog(this, "读档成功！");
             } catch (IOException ex) {
-                throw new RuntimeException(ex);
+                JOptionPane.showMessageDialog(this, "该模式下无法进行读档操作！");
             }
         });
 
@@ -109,7 +109,7 @@ public class GameFrame extends JFrame {
                 writer.close();
                 JOptionPane.showMessageDialog(this, "存档成功！");
             } catch (IOException ex) {
-                throw new RuntimeException(ex);
+                JOptionPane.showMessageDialog(this, "该模式下无法进行读档操作！");
             }
         });
         this.UP.addActionListener(e ->{
@@ -137,3 +137,4 @@ public class GameFrame extends JFrame {
         return gamePanel;
     }
 }
+
