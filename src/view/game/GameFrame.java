@@ -127,6 +127,7 @@ public class GameFrame extends JFrame {
         this.setLocationRelativeTo(null);
 
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        gamePanel.requestFocusInWindow();
 
     }
 

@@ -28,7 +28,7 @@ public class Main {
                     null, options, options[0]);
 
             if (choice == 0) {
-                
+
                 levelFrame.setVisible(true);
             } else if (choice == 1) {
                
