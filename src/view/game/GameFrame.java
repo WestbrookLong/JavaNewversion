@@ -61,7 +61,7 @@ public class GameFrame extends JFrame {
 
         this.loadBtn.addActionListener(e -> {
             username = LoginFrame.getUsername();
-            String dataPath = "C:\\Users\\WESTBROOK\\IdeaProjects\\JavaNewversion\\src\\Userdata/" + username + "/" + username + "data/" + username + "save.txt";
+            String dataPath = ".\\src\\Userdata/" + username + "/" + username + "data/" + username + "save.txt";
             try {
                 BufferedReader reader = new BufferedReader(new FileReader(dataPath));
                 String line;
@@ -93,7 +93,7 @@ public class GameFrame extends JFrame {
 
         this.saveBtn.addActionListener(e -> {
             username= LoginFrame.getUsername();
-            String dataPath = "C:\\Users\\WESTBROOK\\IdeaProjects\\JavaNewversion\\src\\Userdata/"+username+"/"+username+"data/"+username+"save.txt";
+            String dataPath = ".\\src\\Userdata/"+username+"/"+username+"data/"+username+"save.txt";
             try {
                 FileWriter writer = new FileWriter(dataPath);
                 int[][] matrix = mapMatrix.getMatrix();
