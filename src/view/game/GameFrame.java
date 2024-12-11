@@ -30,12 +30,14 @@ public class GameFrame extends JFrame {
 
 
     public GameFrame(int width, int height, MapMatrix mapMatrix) {
+
         this.setTitle("2024 CS109 Project Demo: Pushbox");
         this.setLayout(null);
         this.setSize(width, height);
         gamePanel = new GamePanel(mapMatrix);
         gamePanel.setLocation(30, height / 2 - gamePanel.getHeight() / 2);
         this.add(gamePanel);
+
         this.controller = new GameController(gamePanel, mapMatrix);
 
 
@@ -127,7 +129,7 @@ public class GameFrame extends JFrame {
         this.setLocationRelativeTo(null);
 
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        gamePanel.requestFocusInWindow();
+
 
     }
 

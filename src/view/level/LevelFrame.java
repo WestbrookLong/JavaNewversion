@@ -29,6 +29,7 @@ public class LevelFrame extends JFrame {
             this.gameFrame = new GameFrame(600, 450, mapMatrix);
             this.setVisible(false);
             gameFrame.setVisible(true);
+            gameFrame.getGamePanel().requestFocusInWindow();
         });
 
         level2Btn.addActionListener(l->{
@@ -43,6 +44,7 @@ public class LevelFrame extends JFrame {
             this.gameFrame = new GameFrame(600, 450, mapMatrix);
             this.setVisible(false);
             gameFrame.setVisible(true);//FUCK
+            gameFrame.getGamePanel().requestFocusInWindow();
         });
         level3Btn.addActionListener(l->{
             MapMatrix mapMatrix = new MapMatrix(new int[][]{
@@ -56,6 +58,7 @@ public class LevelFrame extends JFrame {
             this.gameFrame = new GameFrame(600, 450, mapMatrix);
             this.setVisible(false);
             gameFrame.setVisible(true);
+            gameFrame.getGamePanel().requestFocusInWindow();
         });
 
         //todo: complete all level.
