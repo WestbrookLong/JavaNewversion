@@ -46,10 +46,10 @@ public class GameFrame extends JFrame {
         //改动
         this.saveBtn = FrameUtil.createButton(this, "Save", new Point(gamePanel.getWidth() + 80, 300), 80, 50);
         this.stepLabel = FrameUtil.createJLabel(this, "Start", new Font("serif", Font.ITALIC, 22), new Point(gamePanel.getWidth() + 80, 70), 180, 50);
-        this.UP = FrameUtil.createButton(this, "UP", new Point(gamePanel.getWidth() + 20, 50), 100, 50);
-        this.DOWN = FrameUtil.createButton(this, "DOWN", new Point(gamePanel.getWidth() - 120, 50), 100, 50);
-        this.LEFT = FrameUtil.createButton(this, "LEFT", new Point(gamePanel.getWidth() - 220, 50), 100, 50);
-        this.RIGHT = FrameUtil.createButton(this, "RIGHT", new Point(gamePanel.getWidth() -320, 50), 100, 50);
+        this.UP = FrameUtil.createButton(this, "UP", new Point(gamePanel.getWidth() + 20, 10), 100, 50);
+        this.DOWN = FrameUtil.createButton(this, "DOWN", new Point(gamePanel.getWidth() - 120, 10), 100, 50);
+        this.LEFT = FrameUtil.createButton(this, "LEFT", new Point(gamePanel.getWidth() - 220, 10), 100, 50);
+        this.RIGHT = FrameUtil.createButton(this, "RIGHT", new Point(gamePanel.getWidth() -320, 10), 100, 50);
         gamePanel.setStepLabel(stepLabel);
         HerochoosingFrame herochoosingFrame = new HerochoosingFrame(500, 200, this.getGamePanel());
         herochoosingFrame.setVisible(true);

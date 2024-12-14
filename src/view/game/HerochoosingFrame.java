@@ -15,6 +15,7 @@ public class HerochoosingFrame extends JFrame {
         this.setSize(width, height);
         this.setLocation(120, 120);
         this.gamePanel = gamePanel;
+        this.requestFocusInWindow();
 
         JButton herodefault = FrameUtil.createButton(this, "default", new Point(30, height/2 - 50), 120, 120);
         JButton hero2 = FrameUtil.createButton(this, "hero2", new Point(150, height/2 - 50), 120, 120);

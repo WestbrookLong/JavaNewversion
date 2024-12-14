@@ -83,15 +83,19 @@ public class GameController {
     public boolean isVictory(){
         int[][] map = model.getMatrix();
         int count = 0;
+        int box = 0;
         for (int i = 0; i < map.length; i++) {
             for (int j = 0; j < map[0].length; j++) {
+                if(map[i][j] == 10 || map[i][j] == 12){
+                    box++;
+                }
                 if (map[i][j] == 12) { // 检查目标位置
                     count++;
                 }
             }
         }
         // 如果所有目标位置都被箱子占据，则游戏结束
-        if(count == 2){
+        if(count == box){
             return true;
         }
         else {
@@ -174,6 +178,9 @@ public class GameController {
         int upmap = map[i-1][j];
         int downmap = map[i+1][j];
         boolean isTrap = false;
+        if(map[i][j] == 12){
+            return false;
+        }
         if(Barrierasfuck(leftmap) && Barrierasfuck(upmap)){
             isTrap = true;
         }
@@ -189,6 +196,8 @@ public class GameController {
             isTrap = true;
 
         }
+
+
         return isTrap;
 
 

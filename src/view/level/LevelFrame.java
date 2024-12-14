@@ -17,7 +17,7 @@ public class LevelFrame extends JFrame {
         JButton level1Btn = FrameUtil.createButton(this, "Level1", new Point(30, height / 2 - 50), 120, 60);
         JButton level2Btn = FrameUtil.createButton(this, "Level2", new Point(160, height / 2 - 50), 120, 60);
         JButton level3Btn = FrameUtil.createButton(this, "Level3", new Point(290, height / 2 - 50), 120, 60);
-        JButton level6Btn = FrameUtil.createButton(this, "Level3", new Point(290, height / 2 - 50), 120, 60);
+        JButton level6Btn = FrameUtil.createButton(this, "Level3", new Point(420, height / 2 - 50), 120, 60);
 
         level1Btn.addActionListener(l->{
             MapMatrix mapMatrix = new MapMatrix(new int[][]{
@@ -27,7 +27,7 @@ public class LevelFrame extends JFrame {
                     {1, 0, 2, 10, 0, 1},
                     {1, 1, 1, 1, 1, 1},
             });
-            this.gameFrame = new GameFrame(600, 450, mapMatrix);
+            this.gameFrame = new GameFrame(600, 700, mapMatrix);
             this.setVisible(false);
             gameFrame.setVisible(true);
             gameFrame.getGamePanel().requestFocusInWindow();
@@ -42,7 +42,7 @@ public class LevelFrame extends JFrame {
                     {1, 0, 0, 0, 0,0, 1},
                     {1, 1, 1, 1, 1, 1},
             });
-            this.gameFrame = new GameFrame(600, 450, mapMatrix);
+            this.gameFrame = new GameFrame(600, 700, mapMatrix);
             this.setVisible(false);
             gameFrame.setVisible(true);//FUCK
             gameFrame.getGamePanel().requestFocusInWindow();
@@ -57,7 +57,22 @@ public class LevelFrame extends JFrame {
                     {1, 0, 0, 0, 0, 0, 1},
                     {1, 1, 1, 1, 1, 1, 1},
             });
-            this.gameFrame = new GameFrame(600, 450, mapMatrix);
+            this.gameFrame = new GameFrame(600, 700, mapMatrix);
+            this.setVisible(false);
+            gameFrame.setVisible(true);
+            gameFrame.getGamePanel().requestFocusInWindow();
+        });
+        level6Btn.addActionListener(l->{
+            MapMatrix mapMatrix = new MapMatrix(new int[][]{
+                    {1, 1, 1, 1, 1, 1, 1},
+                    {1, 2, 0, 0, 0, 2, 1},
+                    {1, 1, 1, 2, 1, 0, 1},
+                    {1, 0, 0, 10, 20, 0,1},
+                    {1, 0, 0, 10, 10, 0, 1},
+                    {1, 0, 0, 0, 0, 0, 1},
+                    {1, 1, 1, 1, 1, 1, 1},
+            });
+            this.gameFrame = new GameFrame(600, 700, mapMatrix);
             this.setVisible(false);
             gameFrame.setVisible(true);
             gameFrame.getGamePanel().requestFocusInWindow();
