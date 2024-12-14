@@ -101,15 +101,21 @@ public class GameController {
     public boolean isFail(){
         int[][] map = model.getMatrix();
         int count = 0;
+        int box = 0;
+
         for (int i = 0; i < map.length; i++) {
             for (int j = 0; j < map[0].length; j++) {
-                if (map[i][j] == 10) { // 检查目标位置
+                if (map[i][j] == 10 || map[i][j] == 12) {// 检查目标位置
+                    box++;
                     if(isTrap(i, j))
                     count++;
+                    if(isTrapasfuck(i,j)){
+                        return true;
+                    }
                 }
             }
         }
-        if(count != 0 ){
+        if(count ==  box){
             return true;
         }
         else {
@@ -152,6 +158,39 @@ public class GameController {
         }
 
     }
+    public boolean Barrierasfuck(int m){
+        if(m == 1 ){
+            return true;
+        }
+        else {
+            return false;
+        }
+
+    }
+    public boolean isTrapasfuck(int i, int j){
+        int[][] map = model.getMatrix();
+        int leftmap = map[i][j-1];
+        int rightmap = map[i][j+1];
+        int upmap = map[i-1][j];
+        int downmap = map[i+1][j];
+        boolean isTrap = false;
+        if(Barrierasfuck(leftmap) && Barrierasfuck(upmap)){
+            isTrap = true;
+        }
+        else if (Barrierasfuck(leftmap) && Barrierasfuck(downmap)) {
+            isTrap = true;
+
+        }
+        else if (Barrierasfuck(rightmap) && Barrierasfuck(downmap)) {
+            isTrap = true;
+
+        }
+        else if (Barrierasfuck(rightmap) && Barrierasfuck(upmap)) {
+            isTrap = true;
+
+        }
+        return isTrap;
 
 
-}
+
+}}

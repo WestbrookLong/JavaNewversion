@@ -17,13 +17,14 @@ public class LevelFrame extends JFrame {
         JButton level1Btn = FrameUtil.createButton(this, "Level1", new Point(30, height / 2 - 50), 120, 60);
         JButton level2Btn = FrameUtil.createButton(this, "Level2", new Point(160, height / 2 - 50), 120, 60);
         JButton level3Btn = FrameUtil.createButton(this, "Level3", new Point(290, height / 2 - 50), 120, 60);
+        JButton level6Btn = FrameUtil.createButton(this, "Level3", new Point(290, height / 2 - 50), 120, 60);
 
         level1Btn.addActionListener(l->{
             MapMatrix mapMatrix = new MapMatrix(new int[][]{
                     {1, 1, 1, 1, 1, 1},
-                    {1, 0, 0, 0, 0, 1},
-                    {1, 0, 20, 12, 0, 1},
-                    {1, 0, 10, 2, 0, 1},
+                    {1, 20, 0, 0, 0, 1},
+                    {1, 0, 0, 10, 2, 1},
+                    {1, 0, 2, 10, 0, 1},
                     {1, 1, 1, 1, 1, 1},
             });
             this.gameFrame = new GameFrame(600, 450, mapMatrix);
@@ -36,10 +37,10 @@ public class LevelFrame extends JFrame {
             MapMatrix mapMatrix = new MapMatrix(new int[][]{
                     {1, 1, 1, 1, 1, 0},
                     {1, 20, 0, 0, 1, 1},
-                    {1, 0, 0, 2, 0, 1},
-                    {1, 0, 10, 10, 2, 1},
-                    {1, 1, 0, 1, 1, 1},
-                    {0, 1, 1, 1, 0, 0},
+                    {1, 0, 10 ,10 ,0 ,0, 1},
+                    {1, 0, 1, 2, 0,0,2, 1},
+                    {1, 0, 0, 0, 0,0, 1},
+                    {1, 1, 1, 1, 1, 1},
             });
             this.gameFrame = new GameFrame(600, 450, mapMatrix);
             this.setVisible(false);
@@ -50,10 +51,11 @@ public class LevelFrame extends JFrame {
             MapMatrix mapMatrix = new MapMatrix(new int[][]{
                     {0, 0, 1, 1, 1, 1, 0},
                     {1, 1, 1, 0, 0, 1, 0},
-                    {1, 0, 0, 2, 0, 1},
-                    {1, 0, 10, 10, 2, 1},
-                    {1, 1, 0, 1, 1, 1},
-                    {0, 1, 1, 1, 0, 0},
+                    {1, 20, 0, 2, 10, 1,1},
+                    {1, 0, 0, 0, 10, 0,1},
+                    {1, 0, 1, 2, 0, 0, 1},
+                    {1, 0, 0, 0, 0, 0, 1},
+                    {1, 1, 1, 1, 1, 1, 1},
             });
             this.gameFrame = new GameFrame(600, 450, mapMatrix);
             this.setVisible(false);

@@ -8,6 +8,7 @@ import java.awt.*;
 public class HerochoosingFrame extends JFrame {
     private GamePanel gamePanel;
 
+
     public HerochoosingFrame(int width, int height, GamePanel gamePanel){
         this.setTitle("choose your hero");
         this.setLayout(null);
@@ -19,13 +20,16 @@ public class HerochoosingFrame extends JFrame {
         JButton hero2 = FrameUtil.createButton(this, "hero2", new Point(150, height/2 - 50), 120, 120);
         herodefault.addActionListener(e->{
             gamePanel.setHerochoice(1);
+            gamePanel.resetGamePanel();
             this.setVisible(false);
+
 
 
 
         });
         hero2.addActionListener(e->{
             gamePanel.setHerochoice(2);
+            gamePanel.resetGamePanel();
             this.setVisible(false);
 
 

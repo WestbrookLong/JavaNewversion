@@ -98,7 +98,7 @@ public class GamePanel extends ListenerPanel {
 
         }
         if(controller.isFail()){
-            FailFrame failFrame = new FailFrame(500, 400);
+            FailFrame failFrame = new FailFrame(500, 400, this.controller);
             failFrame.setVisible(true);
 
         }
