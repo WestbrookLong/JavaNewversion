@@ -29,7 +29,7 @@ public class Main {
     }
     public static void playWavMusic(String s) {
         try {
-            File audioFile = new File("JavaNewversion\\src\\music.wav");
+            File audioFile = new File(".\\src\\music.wav");
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
             Clip clip = AudioSystem.getClip();
             clip.open(audioStream);
